@@ -1,0 +1,53 @@
+replicaCount: 1  # Number of replicas for scaling
+appname : kube-resource-collector
+image:
+  repository: arconixforge/kube-resource-collector
+  tag: v1.0 
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 5000
+
+
+      
+database:
+  host: postgres-host
+  port: 5432
+  user: postgres-user
+  name: postgres
+  password: random
+  secretName: postgres-secret  
+
+
+namespaces: app-ns,core-ns
+collection_interval: 300
+#  8hrs : 28800 
+rbac:
+  create: true  # Enable/Disable RBAC
+  clusterRole: true  # Set to true if you need Cluster-wide permissions
+
+serviceAccount:
+  create: true  # If false, existing serviceAccountName is used
+  name: "kube-resource-collector-sa" 
+
+# serviceAccount:
+#   create: false  # If false, existing serviceAccountName is used
+#   name: "ps-lbg-app-sa"  # Set to an existing ServiceAccount if create is false
+
+security:
+  runAsUser: 1000
+  runAsGroup: 3000
+  fsGroup: 3000
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+  requests:
+    cpu: "250m"
+    memory: "256Mi"
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

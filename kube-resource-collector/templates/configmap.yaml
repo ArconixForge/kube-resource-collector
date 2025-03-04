@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.appname}}
+data:
+  DB_HOST: "{{ .Values.database.host }}"
+  DB_PORT: "{{ .Values.database.port }}"
+  DB_NAME: "{{ .Values.database.name }}"
+  DB_USER: "{{ .Values.database.user }}"
+  NAMESPACES: "{{ .Values.namespaces }}"
+  COLLECTION_INTERVAL: "{{ .Values.collection_interval }}"
+  GCP_PROJECT_ID: "{{ .Values.gcp.projectId }}"
+  GCP_ARTIFACT_REGION: "{{ .Values.gcp.artifactRegion }}"
+  GCP_ARTIFACT_REPO: "{{ .Values.gcp.artifactRepo }}"
+  DB_SETUP_SCRIPT: "/config/db_setup.sql"

@@ -1,0 +1,40 @@
+helmCommands:
+  # 💡 Template Command: Render templates without installing
+  template: |
+    helm template kube-resource-collector . --values values.yaml
+
+  # 💡 Lint Command: Validate chart syntax
+  lint: |
+    helm lint .
+
+  # 💡 Dry-run Command: Simulate installation without deploying
+  dryRun: |
+    helm install kube-resource-collector . --values values.yaml --namespace k8-collector --dry-run --debug
+
+  # 💡 Install Command: Install the chart into Kubernetes
+  install: |
+    helm install kube-resource-collector . --values values.yaml --namespace k8-collector  --debug
+
+  # 💡 Upgrade Command: Upgrade an existing release with updated chart values
+  upgrade: |
+    helm upgrade kube-resource-collector . --values values.yaml --namespace k8-collector
+
+  # 💡 Uninstall Command: Remove the release from Kubernetes
+  uninstall: |
+    helm uninstall kube-resource-collector --namespace k8-collector
+
+  # 💡 Status Command: Check the release status
+  status: |
+    helm status kube-resource-collector --namespace k8-collector
+
+  # 💡 List Command: List all installed Helm releases
+  list: |
+    helm list --namespace k8-collector
+
+  # 💡 History Command: View the revision history of a release
+  history: |
+    helm history kube-resource-collector --namespace k8-collector
+
+  # 💡 Rollback Command: Roll back to a previous release
+  rollback: |
+    helm rollback kube-resource-collector <REVISION> --namespace k8-collector
